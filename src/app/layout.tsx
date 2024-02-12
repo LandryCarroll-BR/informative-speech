@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Lora } from 'next/font/google'
 import '@/styles/globals.css'
 import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
+export const serif = Lora({ subsets: ['latin'], weight: '400', variable: '--font-serif' })
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn('dark', inter.className)}>{children}</body>
+			<body className={cn('dark antialiased', inter.className, serif.variable)}>{children}</body>
 		</html>
 	)
 }

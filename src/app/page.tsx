@@ -1,9 +1,12 @@
 import { SlideShow } from '@/components/slide-show'
+import Demo from '@/components/spotlight'
 
 export default function Home() {
 	return (
 		<main>
-			<SlideShow />
+			<Demo>
+				<SlideShow />
+			</Demo>
 		</main>
 	)
 }

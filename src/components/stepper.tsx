@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 import { Button, ButtonProps } from './ui/button'
@@ -24,13 +24,24 @@ const useStepper = () => {
 	return stepperContext
 }
 
-type StepperProps = React.HTMLAttributes<HTMLDivElement>
+interface StepperProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+	children: ((state: StepperContextValue) => React.ReactNode) | React.ReactNode
+}
 
 const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(({ children, ...props }, ref) => {
 	const [currentStep, setCurrentStep] = React.useState(1)
 
 	const incrementStep = () => setCurrentStep(currentStep + 1)
 	const decrementStep = () => setCurrentStep(currentStep - 1)
+
+	if (typeof children === 'function')
+		return (
+			<StepperContext.Provider value={{ currentStep, incrementStep, decrementStep }}>
+				<div ref={ref} {...props}>
+					{children({ currentStep, incrementStep, decrementStep })}
+				</div>
+			</StepperContext.Provider>
+		)
 
 	return (
 		<StepperContext.Provider value={{ currentStep, incrementStep, decrementStep }}>
@@ -64,12 +75,14 @@ const Step = React.forwardRef<HTMLDivElement, StepProps>(
 	({ children, className, step, ...props }, ref) => {
 		const state = useStepper()
 
+		const isActive = state.currentStep === step
+
 		if (typeof children !== 'function')
 			return (
 				<>
-					{state.currentStep === step && (
-						<div ref={ref} className={cn('', className)} {...props}>
-							{state.currentStep === step && children}
+					{isActive && (
+						<div ref={ref} className={cn('w-full', className)} {...props}>
+							{children}
 						</div>
 					)}
 				</>
@@ -192,7 +205,15 @@ const StepPrevious = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	({ onClick, ...props }, ref) => {
 		const { currentStep, decrementStep } = useStepper()
 
-		return <Button ref={ref} onClick={decrementStep} disabled={currentStep === 1} {...props} />
+		return (
+			<Button
+				ref={ref}
+				onClick={decrementStep}
+				disabled={currentStep === 1}
+				variant={'secondary'}
+				{...props}
+			/>
+		)
 	}
 )
 StepPrevious.displayName = 'StepPrevious'
