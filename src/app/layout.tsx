@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
-export const serif = Lora({ subsets: ['latin'], weight: '400', variable: '--font-serif' })
+const serif = Lora({ subsets: ['latin'], weight: '400', variable: '--font-serif' })
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
