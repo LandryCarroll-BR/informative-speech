@@ -33,12 +33,12 @@ const steps = [
 			<>
 				<h3 className="text-secondary-foreground">Methodology</h3>
 				<p className={cn('prose text-muted-foreground font-serif')}>
-					Descartes&apos; skepticism emerged during the writing of his <em>Meditations</em>, where
-					he embarked on a quest to ascertain what could be known with certainty. He discerned that
-					any experience open to doubt couldn&apos;t be considered unequivocally true. The act of
-					doubting a single belief destabilized its certainty. This insight motivated him to search
-					for at least one indisputable belief to anchor his understanding, prompting an
-					intellectual purge akin to an epistemic &quot;house cleaning&quot; (Descartes 144-145).
+					The ultimate aim of [Descartes&apos;] method is constructive. Unlike “the skeptics, who
+					doubt only for the sake of doubting,” Descartes aims “to reach certainty — to cast aside
+					the loose earth and sand so as to come upon rock or clay” (Discourse 3, AT 6:29, CSM
+					1:125). Bulldozers are typically used for destructive ends, as are sceptical doubts.
+					Descartes&apos; methodical innovation is to employ demolition for constructive ends.
+					(Newman)
 				</p>
 			</>
 		),
